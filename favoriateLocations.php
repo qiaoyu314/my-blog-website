@@ -41,7 +41,7 @@ require "include/dbConnection.php";
 	  	</div>
 	  	<div class="col-xs-6 col-md-4" id="blog_topic"> <!--location list-->
 	  		<div class="input-group">
-		      	<input type="text" class="form-control" id="address" placeholder="Enter address to search...">
+		      	<input type="text" class="form-control" id="address" placeholder="Enter address or name to search...">
 		      	<span class="input-group-btn">
 		        <button class="btn btn-primary" id="search" type="button">Search</button>
 		      	</span>

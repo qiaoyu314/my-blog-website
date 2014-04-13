@@ -224,6 +224,7 @@ function addLocation(){
 		data: {username: username, location: JSON.stringify(location)},
 		dataType: "json"
 	}).done(function(result){
+		alert(result.status);
 		if(result.status==-1){
 			alert(result.error);		
 		}
@@ -231,8 +232,8 @@ function addLocation(){
 			//load new location to the table
 			loadFavoriateLocations();
 			//change the infor window
-			//placeMarker(true);
 			favoriteLocationId = result["location_id"];
+			placeMarker(true);
 		}
 	}).fail(function(jqXHR, textStatus, errorThrown){
 		alert(textStatus + ", " + errorThrown);

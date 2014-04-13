@@ -361,19 +361,10 @@ The following fucntions are used for Uber project
 		//check if the location exists
 		$location_id = locationExists($location);
 		if($location_id){
-			//echo "location exists\n";
-			//check if it already the favorite
-			$favorite_location = favoriteExists($username, $location_id);
-			if($favorite_location){
-				//echo "favorite exists\n";
-				//update the name
-				updateLocationName($username, $location_id, $name);	
-			}else{
-				//add a new row in favoriate_location table
-				$query = "INSERT INTO favorite_location
-						VALUES('$username', $location_id, '$name')";
-				$result = mysql_query($query,$con);	
-			}
+			//add a new row in favoriate_location table
+			$query = "INSERT INTO favorite_location
+					VALUES('$username', $location_id, '$name')";
+			$result = mysql_query($query,$con);	
 		}else{
 			//insert a new location 
 			$lat = $location["latitude"];
@@ -383,8 +374,7 @@ The following fucntions are used for Uber project
 					VALUES ($lat, $lng, '$address')";
 			$result=mysql_query($query,$con);
 			if (!$result) {
-    			die('insert location Invalid query: ' . mysql_error());
-    			return;
+    			mysql_error();
 			}
 			//connect the user with this location
 			$location_id = mysql_insert_id($con);
@@ -396,11 +386,14 @@ The following fucntions are used for Uber project
 		return $location_id;
 	}
 
+	/**
+	given the geo info, check if it's already exists in the database
+	**/
 	function locationExists($location){
 		global $con;
 		$lat = $location["latitude"];
 		$lng = $location["longitude"];
-		$e = 0.01;
+		$e = 0.001;
 		if(!$con){
 			$con = createConnection();
 		}
@@ -417,23 +410,9 @@ The following fucntions are used for Uber project
 		return null;
 	}
 
-	function favoriteExists($username, $location_id){
-		global $con;
-		if(!$con){
-			$con = createConnection();
-		}
-		$query = "SELECT * 
-				FROM favorite_location
-				WHERE username = '$username' AND location_id = $location_id";
-		mysql_query($query, $con);
-		$result = mysql_query($query, $con);
-		if($result){
-			if($row =  mysql_fetch_array($result))
-				return true;
-		}
-		return false;
-	}
-
+	/**
+	Update the name of a favorite location
+	**/
 	function updateLocationName($username, $location_id, $name){
 		global $con;
 		if(!$con){
@@ -444,7 +423,9 @@ The following fucntions are used for Uber project
 				WHERE username='$username' AND location_id=$location_id";
 		mysql_query($query,$con);
 	}
-
+	/**
+	Delete a favorite location
+	**/
 	function deleteFavoriteLocation($username, $location_id){
 		global $con;
 		if(!$con){
