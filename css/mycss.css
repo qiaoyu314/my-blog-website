@@ -1,0 +1,47 @@
+body 
+{ 
+  background: url(/img/textured_stripes.png); 
+  repeat 0 0;
+} 
+
+div.container
+{
+  /*box-shadow: 0 0 1em 1em #ccc;*/
+}
+
+.h_center
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+li#logout
+{
+	position: absolute;
+	right: 1px;
+}
+.jumbotron{
+	background: url(/img/sandpaper.png); 
+}
+.progress{
+		height: 50px;
+		width: 80%;
+}
+.title{
+	margin-bottom: 2%;
+}
+
+div.blog-preview{
+	border:1px solid;
+	border-radius:10px;
+}
+img.blog-preview{
+	width: auto;
+}
+.btn-round{
+	width: 100px;
+	height: 100px;
+	 border-radius: 100%;
+}
+.scrollable{
+	overflow:scroll;
+}
