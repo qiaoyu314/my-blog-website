@@ -421,7 +421,7 @@ The following fucntions are used for Uber project
 		$query = "UPDATE favorite_location
 				SET name='$name'
 				WHERE username='$username' AND location_id=$location_id";
-		mysql_query($query,$con);
+		return mysql_query($query,$con);
 	}
 	/**
 	Delete a favorite location
@@ -433,7 +433,7 @@ The following fucntions are used for Uber project
 		}
 		$query = "DELETE FROM favorite_location
 				WHERE username='$username' AND location_id=$location_id";
-		mysql_query($query,$con);
+		return mysql_query($query,$con);
 	}
 
 ?>
