@@ -63,7 +63,11 @@
 	    
 	}
 
-	function isLoginCorrect($con, $username, $password){
+	function isLoginCorrect($username, $password){
+		global $con;
+		if(!$con){
+			$con = createConnection();
+		}
 		$usertable = "user";
 		$query = "SELECT * FROM $usertable WHERE username='$username' AND password='$password'";
 		$result = mysql_query($query, $con);
@@ -73,6 +77,16 @@
 			}
 		}
 		return FALSE;
+	}
+
+	function signUp($username, $password){
+		global $con;
+		if(!$con){
+			$con = createConnection();
+		}
+		$query = "INSERT INTO user (username, password)
+				VALUES ('$username', 'password')";
+		return mysql_query($query, $con);
 	}
 
 	/**

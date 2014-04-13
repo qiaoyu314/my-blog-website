@@ -11,71 +11,86 @@
 		<?php include 'template/head.php' ?>	
 		<script type="text/javascript" src="js/jquery.backstretch.min.js"></script>
 		<style type="text/css">
-		.row
-		{
-			margin-top: 5%;
-		}
-		h1.lg{
-			font-size: 100px;
-			text-align:center;
-		}
-		h2
-		{
-			font-style: italic;
-		}
-		form
-		{
-			margin-top: 10%;
-		}
-		div#form
-		{
-			margin-left: 40%;
-			padding: 2% 5% 2% 5%;
-			border-radius:10px;
-			background-color: #eeeeee;
-			opacity: 0.8;
-		}
-		input
-		{
-			margin: 3% 0 3% 0;
-		}
-		#login{
-			margin-top: 3%;
-		}
-		.btn
-		{
-			background-color: #e23351;
-		}
-		#login_title
-		{
-			margin-bottom: 14%;
-		}
-		</style>
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
 	</head>
 	<body>
-		<div class="row">
-			<div class="col-sm-4 col-sm-offset-7">
-				<h1>My heart is, and always will be, yours.</h1>
-				<h2>- Sense and Sensibility</h2>
-				<form role="form" action="login.php" method="POST">
-					<div class="form-group col-lg-6" id="form" >
-						<h3 id="login_title">Please login</h3>
-						<input type="text" class="form-control" placeholder="Username" name="username">
-						<input type="password" class="form-control" placeholder="Password" name="password">
-						<button type="submit" class="btn btn-lg btn-default" id="login">Login</button>
-					</div>
-					
-				</form>
-				<!--button type="button" class="btn btn-danger btn-lg" onclick="location.href=('gallery.php');"><h2>View without account</h2></button-->
-			</div>
-		</div>
+		<div class="container">
 
+      <form class="form-signin" action="login.php" method="POST" onsubmit="return validateForm()">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="input-block-level"  placeholder="Username" name="username">
+        <input type="password" class="input-block-level" placeholder="Password" name="password">
+        <input type="submit" class="btn btn-large btn-success" name="action" value="sign-in">
+        <input type="submit" class="btn btn-large btn-danger" name="action" value="sign-up">
+      </form>
+      <h1>My heart is, and always will be, yours.</h1>
+		<h2>- Sense and Sensibility</h2>
+
+    </div> <!-- /container -->
 		<script type="text/javascript">
-			//background image
-			$.backstretch("img/love.jpg");
-			//set container height
-			$(".container").css("height",$(window).height());
-			//set the button postion 
+			$(document).ready(function(){
+				//background image
+				$.backstretch("img/love.jpg");
+				//set container height
+				$(".container").css("height",$(window).height());
+	
+				$("button#sign-in").click(function(){
+					alert("singn");
+					var username = $("input#username").val();
+					var password = $("input#password").val();
+					$.ajax({
+						type: "POST",
+						url: "login.php",
+						data: {username: username, password: password},
+					});
+				});				
+
+			});
+			function validateForm(){
+				var username = $("input[name='username']").val().trim();
+				if(!username){
+					alert("Username is empty.");
+					return false;
+				}
+				var password = $("input[name='password']").val().trim();
+				if(!password){
+					alert("Password is empty.");
+					return false;
+				}
+				return true;
+			}
+			
 		</script>
 	</body>
 </html>

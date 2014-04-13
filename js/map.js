@@ -24,7 +24,12 @@ $(document).ready(function(){
 	$input = $("input#address");
 	$("button#search").click(function(){
 		var address = $input.val();
-		searchAddress(address);
+		//check if it's a favoriate name
+		if(isFavoriteName(address)){
+			placeMarker(true);
+		}else{
+			searchAddress(address);
+		}
 	});
 });
 
@@ -296,6 +301,25 @@ function favoriteExists(latitude, longitude){
 	var found = false;
 	$.each(favoriteLocations, function(key, location){
 		if(Math.abs(location.latitude) - latitude < e && Math.abs(location.longitude - longitude)<e){
+			//alert("found one");
+			latLng = new google.maps.LatLng(location.latitude,location.longitude);
+			favoriteName = location.name;
+			address = location.address;
+			favoriteLocationId = i;
+			found = true;
+			return;
+		}
+		i++;
+	});
+	return found;
+}
+
+//
+function isFavoriteName(inputName){
+	var i = 0;
+	var found = false;
+	$.each(favoriteLocations, function(key, location){
+		if(location.name == inputName){
 			//alert("found one");
 			latLng = new google.maps.LatLng(location.latitude,location.longitude);
 			favoriteName = location.name;

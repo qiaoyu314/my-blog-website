@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(isset($_SESSION['login'])){
+	$currentUser = $_SESSION['login'];
+}
 
 include 'template/navi.php';
 require "include/dbConnection.php";
