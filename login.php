@@ -8,9 +8,7 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 $action = $_POST["action"];
 
-if($action=="sign-in"){
-
-
+if($action=="Sign In"){
   if(isLoginCorrect($username, $password)){
     $_SESSION['login'] = $username;
     if(isset($_SESSION['prev_page'])){

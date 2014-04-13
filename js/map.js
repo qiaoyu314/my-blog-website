@@ -324,7 +324,7 @@ function isFavoriteName(inputName){
 	var i = 0;
 	var found = false;
 	$.each(favoriteLocations, function(key, location){
-		if(location.name == inputName){
+		if(location.name.toLowerCase() == inputName.toLowerCase()){
 			//alert("found one");
 			latLng = new google.maps.LatLng(location.latitude,location.longitude);
 			favoriteName = location.name;

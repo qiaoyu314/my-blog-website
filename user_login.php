@@ -51,8 +51,8 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="input-block-level"  placeholder="Username" name="username">
         <input type="password" class="input-block-level" placeholder="Password" name="password">
-        <input type="submit" class="btn btn-large btn-success" name="action" value="sign-in">
-        <input type="submit" class="btn btn-large btn-danger" name="action" value="sign-up">
+        <input type="submit" class="btn btn-large btn-success" name="action" value="Sign In">
+        <input type="submit" class="btn btn-large btn-danger" name="action" value="Sign Up">
       </form>
       <h1>My heart is, and always will be, yours.</h1>
 		<h2>- Sense and Sensibility</h2>
