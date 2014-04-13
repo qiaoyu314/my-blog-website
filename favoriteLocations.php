@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!(isset($_SESSION['login']))){
-	$_SESSION["prev_page"] = "favoriateLocations.php";
+	$_SESSION["prev_page"] = "favoriteLocations.php";
 	header("Location: user_login.php");
 }else{
 	$currentUser = $_SESSION['login'];

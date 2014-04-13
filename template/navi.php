@@ -22,7 +22,7 @@
 			'<a href="gallery.php">Gallery</a></li>',
 			'<a href="evaluate.php">Evaluate</a></li>',
 			'<a href="score.php">View My Score</a></li>',
-			'<a href="favoriateLocations.php">Favoriate Locations</a></li>'
+			'<a href="favoriteLocations.php">Favorite Locations</a></li>'
 		);
 		$i = 1;
 		foreach ($menus as $menu) {
