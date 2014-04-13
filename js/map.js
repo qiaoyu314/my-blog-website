@@ -8,6 +8,7 @@ var address;
 var favoriteName;
 var favoriteLocations;
 var favoriteLocationId;
+var defaultZoom = 13;
 
 $(document).ready(function(){
 
@@ -36,7 +37,7 @@ $(document).ready(function(){
 //initialize the map
 function initialize() {
 	var mapOptions = {
-	  zoom: 13
+	  zoom: defaultZoom
 	};
 	geocoder = new google.maps.Geocoder();
 	map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -154,6 +155,9 @@ function placeMarker(savedLocation){
         animation: google.maps.Animation.DROP,
         position: latLng
 	});
+	if(map.getZoom()<defaultZoom){
+		map.setZoom(defaultZoom);
+	}
 	createInfoWindow(savedLocation);
 	google.maps.event.addListener(marker, 'click', function(){
 		latLng = marker.getPosition();

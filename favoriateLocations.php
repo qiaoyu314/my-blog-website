@@ -39,8 +39,8 @@ require "include/dbConnection.php";
 	  	<div class="col-xs-12 col-md-8 full-hight"> <!--map view-->
 	  		<div class="full-hight" id="map-canvas"></div>
 	  	</div>
-	  	<div class="col-xs-6 col-md-4" id="blog_topic"> <!--location list-->
-	  		<div class="input-group">
+	  	<div class="col-xs-6 col-md-4"> <!--location list-->
+	  		<div class="input-group" id="search-input">
 		      	<input type="text" class="form-control" id="address" placeholder="Enter address or name to search...">
 		      	<span class="input-group-btn">
 		        <button class="btn btn-primary" id="search" type="button">Search</button>
