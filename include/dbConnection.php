@@ -346,7 +346,7 @@ The following fucntions are used for Uber project
 			}
 
 		}else{
-			die('load favorite Invalid query: ' . mysql_error());
+			return null;
 		}
 		//$json = json_encode($jsonArray);
 		return $jsonArray;

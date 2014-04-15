@@ -228,10 +228,7 @@ function addLocation(){
 		data: {username:username,location: JSON.stringify(location)},
 		dataType: "json"
 	}).done(function(result){
-		if(result.status==-1){
-			alert(result.error);		
-		}
-		else{
+		if(result.status==1){
 			//load new location to the table
 			loadFavoriateLocations();
 			//change the infor window
@@ -260,10 +257,7 @@ function updateLocationName(){
 		data: {username: username, location_id: favoriteLocationId, name: newName},
 		dataType: "json"
 	}).done(function(result){
-	if(result.status==-1){
-		alert(result.error);		
-	}
-	else{
+	if(result.status==1){
 		favoriteName = newName;
 		//load new location to the table
 		loadFavoriateLocations();
@@ -271,7 +265,7 @@ function updateLocationName(){
 		placeMarker(true);
 	}
 	}).fail(function(jqXHR, textStatus, errorThrown){
-	alert(textStatus + ", " + errorThrown);
+		alert(errorThrown);
 	});
 	
 }
@@ -284,10 +278,7 @@ function deleteFavoriteLocation(){
 		data: {username: username, location_id: favoriteLocationId},
 		dataType: "json"
 	}).done(function(result){
-	if(result.status==-1){
-		alert(result.error);		
-	}
-	else{
+	if(result.status==1){
 		//reload the favorite location table
 		loadFavoriateLocations();
 		//remove the marker
