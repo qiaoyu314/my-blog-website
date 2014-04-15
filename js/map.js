@@ -82,7 +82,7 @@ function generateInfoContent(savedLocation){
 					"<div class='input-group'>" +
 					"<input type='text' class='form-control' id='name' placeholder='" + favoriteName + "'>" +
 					"<span class='input-group-btn'>" +
-					"<button class='btn btn-success' id='update' type='button' onclick='updateLocationName()'>Rename</button>" +
+					"<button class='btn btn-warning' id='update' type='button' onclick='updateLocationName()'>Rename</button>" +
 					"</span>" +
 					"<span class='input-group-btn'>" +
 					"<button class='btn btn-danger' id='delete' type='button' onclick='deleteFavoriteLocation()'>Delete</button>" +
@@ -172,7 +172,7 @@ function placeMarker(savedLocation){
 //load all favoriate locations
 function loadFavoriateLocations(){
 	$.ajax({
-		type: "POST",
+		type: "GET",
 		url: "api/loadLocations.php",
 		data: {username: username},
 		dataType: "json"
@@ -256,7 +256,7 @@ function updateLocationName(){
 		return;
 	}
 	$.ajax({
-		type:"POST",
+		type:"PUT",
 		url:"api/updateLocationName.php",
 		data: {username: username, location_id: favoriteLocationId, name: newName},
 		dataType: "json"
@@ -280,7 +280,7 @@ function updateLocationName(){
 //delete a favorite location
 function deleteFavoriteLocation(){
 	$.ajax({
-		type:"POST",
+		type:"DELETE",
 		url:"api/deleteFavoriteLocation.php",
 		data: {username: username, location_id: favoriteLocationId},
 		dataType: "json"

@@ -6,19 +6,27 @@ require "../include/dbConnection.php";
 header('Content-Type:application/json');
 
 $result = array();
-if(empty($_POST['username'])){
-	$result["status"] = -1;
-	$result["error"] = "No user ID.";
-}else if(empty($_POST['location_id'])){
-	$result["status"] = -1;
-	$result["error"] = "No location info.";
-}else{
-	if(deleteFavoriteLocation($_POST['username'], $_POST['location_id'], $_POST['name'])){
-		$result["status"] = 1;
-	}else{
+$_DELETE  = array(); 
+
+if($_SERVER['REQUEST_METHOD'] == 'DELETE') {  
+    parse_str(file_get_contents('php://input'), $_DELETE);  
+	if(empty($_DELETE['username'])){
 		$result["status"] = -1;
-		$result["error"] = "Query fails.";
+		$result["error"] = "No user ID.";
+	}else if(empty($_DELETE['location_id'])){
+		$result["status"] = -1;
+		$result["error"] = "No location info.";
+	}else{
+		if(deleteFavoriteLocation($_DELETE['username'], $_DELETE['location_id'], $_DELETE['name'])){
+			$result["status"] = 1;
+		}else{
+			$result["status"] = -1;
+			$result["error"] = "Query fails.";
+		}
 	}
+}else{
+	$result["status"] = -1;
+	$result["error"] = "Invalid request method.";
 }
 
 echo json_encode($result);
