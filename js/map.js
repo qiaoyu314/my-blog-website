@@ -225,10 +225,9 @@ function addLocation(){
 	$.ajax({
 		type:"POST",
 		url:"api/addLocation.php",
-		data: {username: username, location: JSON.stringify(location)},
+		data: {username:username,location: JSON.stringify(location)},
 		dataType: "json"
 	}).done(function(result){
-		alert(result.status);
 		if(result.status==-1){
 			alert(result.error);		
 		}

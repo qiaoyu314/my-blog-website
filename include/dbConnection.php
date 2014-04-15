@@ -353,18 +353,21 @@ The following fucntions are used for Uber project
 	}
 	/**
 	add a new faviorate location for a user
-	if it already is, update the name
+	return the location id
+	otherwise, return -1
 	**/
 	function addFavoriateLocation($username, $location){
 		global $con;
 		$name = $location["name"];
 		//check if the location exists
 		$location_id = locationExists($location);
-		if($location_id){
+		if($location_id!=-1){
 			//add a new row in favoriate_location table
 			$query = "INSERT INTO favorite_location
 					VALUES('$username', $location_id, '$name')";
-			$result = mysql_query($query,$con);	
+			if(!mysql_query($query,$con)){
+				return -1;
+			}	
 		}else{
 			//insert a new location 
 			$lat = $location["latitude"];
@@ -372,22 +375,24 @@ The following fucntions are used for Uber project
 			$address = mysql_real_escape_string($location["address"]);
 			$query = "INSERT INTO location (latitude, longitude, address)
 					VALUES ($lat, $lng, '$address')";
-			$result=mysql_query($query,$con);
-			if (!$result) {
-    			mysql_error();
-			}
+			if(!mysql_query($query,$con)){
+				return -1;
+			}		
 			//connect the user with this location
 			$location_id = mysql_insert_id($con);
 			//echo "$location_id";
 			$query = "INSERT INTO favorite_location
 					VALUES('$username', $location_id, '$name')";
-			$result=mysql_query($query,$con);
+			if(!mysql_query($query,$con)){
+				return -1;
+			}
 		}
 		return $location_id;
 	}
 
 	/**
 	given the geo info, check if it's already exists in the database
+	return location id or -1
 	**/
 	function locationExists($location){
 		global $con;
@@ -407,11 +412,12 @@ The following fucntions are used for Uber project
 				return $row[0];
 			}	
 		}
-		return null;
+		return -1;
 	}
 
 	/**
 	Update the name of a favorite location
+	return true or false
 	**/
 	function updateLocationName($username, $location_id, $name){
 		global $con;
@@ -425,6 +431,7 @@ The following fucntions are used for Uber project
 	}
 	/**
 	Delete a favorite location
+	return true or false
 	**/
 	function deleteFavoriteLocation($username, $location_id){
 		global $con;
